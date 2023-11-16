@@ -2,29 +2,28 @@ import 'dart:io';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:techcarreer_technopark_bootcamp/pages/drawer_test.dart';
+import 'package:techcarreer_technopark_bootcamp/screens/home.dart';
 
 void main() {
-  runApp(const TabBarApp());
+  runApp(const MyApp());
 }
 
-class TabBarApp extends StatefulWidget {
-  const TabBarApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
 
   @override
-  State<TabBarApp> createState() => _TabBarAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 void closeApp() {
   exit(0);
 }
 
-class _TabBarAppState extends State<TabBarApp> {
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const CustomDrawer(),
+      home: const CustomHome(),
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           color: Colors.pink,
