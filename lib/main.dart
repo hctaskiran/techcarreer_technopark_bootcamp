@@ -1,177 +1,116 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
+import 'dart:io';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:techcarreer_technopark_bootcamp/pages/stateful_deneme.dart';
-import 'package:techcarreer_technopark_bootcamp/pages/stateless_deneme.dart';
+import 'package:flutter/widgets.dart';
+import 'package:techcarreer_technopark_bootcamp/pages/drawer_test.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const TabBarApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class TabBarApp extends StatefulWidget {
+  const TabBarApp({super.key});
 
+  @override
+  State<TabBarApp> createState() => _TabBarAppState();
+}
+
+void closeApp() {
+  exit(0);
+}
+
+class _TabBarAppState extends State<TabBarApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
+      home: const CustomDrawer(),
       theme: ThemeData(
-        appBarTheme: _customAppBar(),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        appBarTheme: const AppBarTheme(
+          color: Colors.pink,
+          elevation: 3,
+        )
       ),
-      home: const StatefulDenemePage()
+      debugShowCheckedModeBanner: false,
     );
   }
-
-  AppBarTheme _customAppBar() {
-    return const AppBarTheme(
-        
-        centerTitle: true,
-        elevation: 3,
-        foregroundColor: Colors.black,
-        color: Colors.green
-      );
-  }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+
+
+
+
+
+
+
+
+
+
+
+
+class NavigationExample extends StatefulWidget {
+  NavigationExample({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<NavigationExample> createState() => _NavigationExampleState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _NavigationExampleState extends State<NavigationExample> {
+  final String midText = 'This is a Navigation Example';
+  final barTitle = const Text('Navigation Example');
+  final homeTitle = const Text('Home Page');
+  final terminateTitle = const Text('Exit');
+  final assetPath = const AssetImage("assets/images/duck.png");
+  final String accName = 'Haktan Can Taskiran';
+  final String accMail = 'haktancantaskiran@gmail.com';
+  final terminateIcon = const Icon(Icons.warning_amber_outlined);
+  final homeIcon = const Icon(Icons.home_filled);
+  final pauseSec = const Duration(seconds: 3);
+  final speedSec = const Duration(milliseconds: 100);
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-          // TRY THIS: Try changing the color here to a specific color (to
-          // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-          // change color while the other colors stay the same.
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: ListView(
-          children: [
+      appBar: AppBar(title: barTitle),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text(accName),
+              accountEmail: Text(accMail),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: assetPath,
+              ),
+            ),
             ListTile(
-              leading: const Icon(Icons.car_rental),
-              title: const Text('Cars'),
-              subtitle: const Text('Rent a Car'),
-              trailing: const Icon(Icons.ads_click),
+              title: homeTitle,
+              leading: homeIcon,
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    backgroundColor: Colors.red,
-                    content: Text(
-                      'Not available car',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    duration: Duration(seconds: 2)));
+                Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.tv),
-              title: const Text('TV'),
-              subtitle: const Text('Rent a TV'),
-              trailing: const Icon(Icons.ads_click),
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    backgroundColor: Colors.red,
-                    content: Text(
-                      'Not available TV to rent',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    duration: Duration(seconds: 2)));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.home_outlined),
-              title: const Text('Houses'),
-              subtitle: const Text('Rent daily house'),
-              trailing: const Icon(Icons.ads_click),
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text(
-                      'Home found!',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    duration: Duration(seconds: 2)));
-                    
+              title: terminateTitle,
+              leading: terminateIcon,
+              onTap:() {
+                closeApp();
               },
             )
           ],
-        ));
-  }
-
-  Container _main() {
-    double _wt = 400;
-    double _ht = 400;
-
-    return Container(
-      width: _wt,
-      height: _ht,
-      color: Colors.red,
-    );
-  }
-
-  Container _yellow() {
-    double _wt = 300;
-    double _ht = 100;
-
-    return Container(
-      width: _wt,
-      height: _ht,
-      color: Colors.yellow,
-      child: const Center(child: Text('Third')),
-    );
-  }
-
-  Container _green() {
-    double _wt = 200;
-    double _ht = 100;
-
-    return Container(
-      width: _wt,
-      height: _ht,
-      color: Colors.green,
-      child: const Center(child: Text('Second')),
-    );
-  }
-
-  Container _blue() {
-    double _wt = 100;
-    double _ht = 100;
-
-    return Container(
-      width: _wt,
-      height: _ht,
-      color: Colors.blue,
-      child: const Center(child: Text('First')),
+        ),
+      ),
+      body: Center(
+        child: AnimatedTextKit(
+          repeatForever: true,
+          pause: pauseSec,
+          animatedTexts: [
+            TyperAnimatedText(
+              midText, 
+              speed: speedSec
+            )
+          ]
+        )
+      ),
     );
   }
 }
