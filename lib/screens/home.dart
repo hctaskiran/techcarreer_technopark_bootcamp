@@ -19,7 +19,10 @@ class _CustomHomeState extends State<CustomHome> {
   }
 
   void getData() async {
-    userModel = await (ApiService().getUsers());
+    var users = (await (ApiService().getUsers()));
+    setState(() {
+      userModel = users;
+    });
   }
 
 
@@ -40,8 +43,13 @@ class _CustomHomeState extends State<CustomHome> {
                   children: [
                     Text(userModel![index].id.toString()),
                     Text(userModel![index].name.toString()),
+                    Text(userModel![index].email.toString()),
+                    Text(userModel![index].address.toString()),
+                    Text(userModel![index].phone.toString()),
+                    Text(userModel![index].website.toString()),
+                    Text(userModel![index].company.toString()),
                   ],
-                )
+                ),
               ],
             ),
           );
