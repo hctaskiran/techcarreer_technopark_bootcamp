@@ -15,7 +15,6 @@ class ApiService {
         List<UserModel> _model = userModelFromJson(response.body);
         return _model;
       }
-      
     } catch (e) {
       log(e.toString());
     }
