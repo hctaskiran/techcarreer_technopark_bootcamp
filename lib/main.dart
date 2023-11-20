@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:techcarreer_technopark_bootcamp/screens/home.dart';
+import 'package:techcarreer_technopark_bootcamp/screens/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const CustomHome(),
+      home: const HomeWidget(),
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           color: Colors.pink,
