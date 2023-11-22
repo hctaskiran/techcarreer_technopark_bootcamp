@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:techcarreer_technopark_bootcamp/pages/bottom_nav_bar.dart';
 
 void main () {
   runApp(const MyApp());
@@ -9,15 +10,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var title = const Text('Network Image');
-    String image = 'https://picsum.photos/200/300';
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: title),
-        body: Center(
-          child: Image.network(image)
-        ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Colors.orange.shade600,
+          elevation: 3,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)
+          )
+        )
       ),
+      home: ButtomNavBarTutor(),
     );
   }
 }
